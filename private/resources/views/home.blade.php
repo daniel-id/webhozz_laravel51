@@ -8,15 +8,15 @@
         Tambah Data
       </div>
       <div class="panel-body">
-        {!! Form::open(['url' => '/tambah'])  !!}
+        {!! Form::open(['url' => '/add'])  !!}
         
           Nama:
           {!! Form::text('nama', '', ['placeholder' => 'Nama', 'class' => 'form-control']) !!}
-          Alamat:
+          <br>Alamat:
           {!! Form::text('alamat', '', ['placeholder' => 'Alamat', 'class' => 'form-control']) !!}
-          Kelas:
+          <br>Kelas:
           {!! Form::text('kelas', '', ['placeholder' => 'Kelas', 'class' => 'form-control']) !!}
-          <p></p>
+          <br><p></p>
           {!! Form::submit('Tambah Data', ['class' => 'btn btn-danger']) !!}
 
         {!! Form::close() !!}

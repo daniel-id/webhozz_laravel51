@@ -15,6 +15,16 @@ Route::get('/', function () {
   return view('home');
 });
 
-Route::post('tambah', 'Crudcontroller@tambahdata');
+Route::post('add', 'Crudcontroller@tambahdata');
 
-Route::get('baca', 'Crudcontroller@bacadata');
+Route::get('read', 'Crudcontroller@bacadata');
+
+Route::get('delete/{id}', 'Crudcontroller@hapusdata');
+
+Route::get('edit/{id}', 'Crudcontroller@ubahdata');
+
+Route::post('editprocess', 'Crudcontroller@proseseditdata');
+
+// Route::get('login', function() {
+// 	return view('login');
+// });

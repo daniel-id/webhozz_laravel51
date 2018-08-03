@@ -9,22 +9,51 @@ use App\Http\Controllers\Controller;
 use Input;
 use DB;
 use Redirect;
+use View;
 
 class Crudcontroller extends Controller
 {  
-    public function tambahdata() {
-        $data = array(
-            'nama'=>Input::get('nama'),
-            'alamat'=>Input::get('alamat'),
-            'kelas'=>Input::get('kelas'),
-        );
+  public function tambahdata() {
+    $data = array(
+      'nama'=>Input::get('nama'),
+      'alamat'=>Input::get('alamat'),
+      'kelas'=>Input::get('kelas')
+    );
 
-        DB::table('siswa')->insert($data);
-        return Redirect::to('baca')->with('message', 'Berhasil menambah data !');
-    }
+    DB::table('siswa')->insert($data);
+    return Redirect::to('/read')->with('message', 'Berhasil menambah data !..');
+  }
 
-    public function bacadata() {
-        $data = DB::table('siswa')->get();
-        return View::make('baca')->with('siswa', $data);
-    }
+  public function bacadata() {
+    $data = DB::table('siswa')->get();
+    return View::make('read')->with('siswa', $data);
+  }
+
+  public function hapusdata($id)
+  {
+     DB::table('siswa')->where('id', '=', $id)->delete();
+
+     return Redirect::to('/read')->with('message', 'Berhasil menghapus data !..');
+  }
+
+  public function ubahdata($id)
+  {
+    $data = DB::table('siswa')->where('id', '=', $id)->first();
+
+    return View::make('edit_form')->with('siswa', $data);
+  }
+
+  public function proseseditdata() 
+  {
+    $data = array(
+      'nama' => Input::get('nama'),
+      'alamat' => Input::get('alamat'),
+      'kelas' => Input::get('kelas')
+    );
+
+    DB::table('siswa')->where('id', '=', Input::get('id'))->update($data);
+
+    return Redirect::to('read')->with('message', 'Berhasil mengedit data !..');
+  }
+
 }
