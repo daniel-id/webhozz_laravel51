@@ -12,9 +12,16 @@
 </head>
 <body>
 	<header>
-		<div class="container">
+		<div class="container-fluid">
 			<div class="alert alert-info" role="alert">
-				Selamat Belajar di Laravel {{ App::VERSION() }}
+				WebHozz - Belajar Laravel {{ App::VERSION() }}
+
+				@if(!empty(Auth::user()->username) ) 
+          <span style='float: right;'> 
+              Selamat datang, {{ @Auth::user()->username }} |  
+              <a class="btn btn-sm btn-danger" href="{{ URL('logout') }}"><i class="fa fa-power-off"></i> LOGOUT</a>  
+          </span> 
+        @endif 
 			</div>
 		</div>
 	</header>

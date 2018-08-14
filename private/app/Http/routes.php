@@ -12,8 +12,58 @@
 */
 
 Route::get('/', function () {
-  return view('home');
+	if (Auth::user()) {
+		if (Auth::user()->access_rights=='admin') {
+			return view('home');
+		} else {
+			return view('home');
+		}
+	} else {
+		return view('login');
+	}
 });
+
+Route::get('login', function () {
+	if (Auth::user()) {
+		if (Auth::user()->access_rights=='admin') {
+			return view('home');
+		} else {
+			return view('user');
+		}
+	} else {
+		return view('login');
+	}
+});
+
+Route::get('register', function() {
+	if (Auth::user()) {
+		if (Auth::user()->access_rights=='admin') {
+			return view('home');
+		} else {
+			return view('user');
+		}
+	} else {
+		return view('register');
+	}
+});
+
+Route::get('user', function() {
+	if (Auth::user()) {
+		if (Auth::user()->access_rights=='admin') {
+			return view('home');
+		} else {
+			return view('user');
+		}
+	} else {
+		return view('login');
+	}
+});
+
+Route::get('logout', 'Crudcontroller@logout');
+
+Route::post('login', 'Crudcontroller@login');
+
+Route::post('adduser', 'Crudcontroller@tambahuser');
 
 Route::post('add', 'Crudcontroller@tambahdata');
 
@@ -24,7 +74,3 @@ Route::get('delete/{id}', 'Crudcontroller@hapusdata');
 Route::get('edit/{id}', 'Crudcontroller@ubahdata');
 
 Route::post('editprocess', 'Crudcontroller@proseseditdata');
-
-// Route::get('login', function() {
-// 	return view('login');
-// });
